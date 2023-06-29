@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div
+      <!-- <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
       >
         <chart-card
@@ -27,7 +27,9 @@
             </div>
           </template>
         </chart-card>
-      </div>
+      </div> -->
+
+      <!--       
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
       >
@@ -50,46 +52,129 @@
             </div>
           </template>
         </chart-card>
-      </div>
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-      >
-        <chart-card
-          :chart-data="dataCompletedTasksChart.data"
-          :chart-options="dataCompletedTasksChart.options"
-          :chart-type="'Line'"
-          data-background-color="green"
-        >
-          <template slot="content">
-            <h4 class="title">Completed Tasks</h4>
-            <p class="category">Last Campaign Performance</p>
-          </template>
+      </div> -->
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              campaign sent 26 minutes ago
-            </div>
-          </template>
-        </chart-card>
-      </div>
       <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <stats-card data-background-color="green">
           <template slot="header">
-            <md-icon>store</md-icon>
+            <md-icon>description</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Revenue</p>
-            <h3 class="title">$34,245</h3>
+            <p class="category">
+              <strong
+                >Please fill some questions for a better suggestion</strong
+              >
+            </p>
+
+            <md-radio v-model="isConvolutionalApplication" :value="false"
+              >My model <strong>will not</strong> need to work processing
+              images</md-radio
+            >
+            <md-radio v-model="isConvolutionalApplication" :value="true"
+              >My model will work with images processing</md-radio
+            >
+
+            <md-field v-if="!isConvolutionalApplication">
+              <label>How many features?</label>
+              <md-input type="number" v-model="type"></md-input>
+              <span class="md-helper-text"
+                >Ex: weight, height, shape, color... As many as your model
+                has.</span
+              >
+            </md-field>
+
+            <div v-else>
+              <md-field>
+                <label>What is the height in pixels of the image?</label>
+                <md-input type="number" v-model="type"></md-input>
+                <span class="md-helper-text"
+                  >Here you fill the <strong>height</strong> in pixels.</span
+                >
+              </md-field>
+
+              <md-field>
+                <label>What is the width in pixels of the image?</label>
+                <md-input type="number" v-model="type"></md-input>
+                <span class="md-helper-text"
+                  >Here you fill the <strong>width</strong> in pixels.</span
+                >
+              </md-field>
+            </div>
+
+            <md-field>
+              <label>What accuracy value do you want?</label>
+              <md-input type="number" v-model="type"></md-input>
+              <span class="md-helper-text"
+                >Here you fill the number of accuracy that you hope for your
+                model</span
+              >
+            </md-field>
+
+            <md-field>
+              <label>What reliability value do you want?</label>
+              <md-input type="number" v-model="type"></md-input>
+              <span class="md-helper-text"
+                >Here you fill the number of reliability that you hope for your
+                model</span
+              >
+            </md-field>
+            <BR/>
+            <md-subheader>Have you considered using a neural network? Can you suggest an basic architecture?</md-subheader>
+
+            <md-field>
+              <label>Neurons?</label>
+              <md-input type="number" v-model="type"></md-input>
+              <span class="md-helper-text"
+                >Number of neurons suggested</span
+              >
+            </md-field>
+
+            <md-field>
+              <label>Layers?</label>
+              <md-input type="number" v-model="type"></md-input>
+              <span class="md-helper-text"
+                >Number of layers suggested</span
+              >
+            </md-field>
+
+
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>date_range</md-icon>
-              Last 24 Hours
+              Valid data of last request
+            </div>
+          </template>
+        </stats-card>
+
+
+      </div>
+
+      <div
+        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
+      >
+        <stats-card data-background-color="green">
+          <template slot="header">
+            <md-icon>info_outline</md-icon>
+          </template>
+
+          <template slot="content">
+            <p class="category"><strong>VC Dims</strong></p>
+            <ul>
+              <h3 class="title">Neural 1300</h3>
+              <h3 class="title">Linear 13</h3>
+              <h3 class="title">SVM 100</h3>
+            </ul>
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>date_range</md-icon>
+              Valid data of last request
             </div>
           </template>
         </stats-card>
@@ -103,27 +188,52 @@
           </template>
 
           <template slot="content">
-            <p class="category">Used Space</p>
-            <h3 class="title">
-              49/50
-              <small>GB</small>
-            </h3>
+            <p class="category"><strong>Minimal Samples</strong></p>
+            <ul>
+              <h3 class="title">Neural 1300</h3>
+              <h3 class="title">Linear 13</h3>
+              <h3 class="title">SVM 100</h3>
+            </ul>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <md-icon class="text-danger">warning</md-icon>
-              <a href="#pablo">Get More Space...</a>
+              <md-icon>date_range</md-icon>
+              Valid data of last request
             </div>
           </template>
         </stats-card>
       </div>
+
       <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+      >
+        <chart-card
+          :chart-data="dataCompletedTasksChart.data"
+          :chart-options="dataCompletedTasksChart.options"
+          :chart-type="'Line'"
+          data-background-color="green"
+        >
+          <template slot="content">
+            <h4 class="title">Machine Learning Algorithms Comparison</h4>
+            <!-- <p class="category">Based on last input profile</p> -->
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>access_time</md-icon>
+              Based on last input profile
+            </div>
+          </template>
+        </chart-card>
+      </div>
+
+      <!-- <div
         class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
         <stats-card data-background-color="red">
           <template slot="header">
-            <md-icon>info_outline</md-icon>
+            <md-icon>store</md-icon>
           </template>
 
           <template slot="content">
@@ -159,14 +269,14 @@
             </div>
           </template>
         </stats-card>
-      </div>
+      </div> -->
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <md-card>
           <md-card-header data-background-color="orange">
-            <h4 class="title">Employees Stats</h4>
-            <p class="category">New employees on 15th September, 2016</p>
+            <h4 class="title">Relationship between Accuracy x Reliability</h4>
+            <p class="category">Samples needed</p>
           </md-card-header>
           <md-card-content>
             <ordered-table table-header-color="orange"></ordered-table>
@@ -218,6 +328,7 @@ export default {
   },
   data() {
     return {
+      isConvolutionalApplication: false,
       dailySalesChart: {
         data: {
           labels: ["M", "T", "W", "T", "F", "S", "S"],
