@@ -183,10 +183,10 @@
 
           <template slot="content">
             <p class="category"><strong>Minimal Samples</strong></p>
-            <ul>
-              <h3 class="title">Neural 1300</h3>
-              <h3 class="title">Linear 13</h3>
-              <h3 class="title">SVM 100</h3>
+            <BR/>
+            <ul v-for="item in simulationData" :key="item.index">
+              <h3 class="title">{{item.model +" "+item.minimalSample}}</h3>
+
             </ul>
           </template>
 
@@ -329,7 +329,7 @@ export default {
       // https://run.mocky.io/v3/c5525a96-892e-474a-9227-b9d5db725a85
 
       if (this.isConvolutionalApplication){
-        this.features=this.height*this.width;
+        this.input.features=this.input.height*this.input.width;
       }
       axios
         .get(
