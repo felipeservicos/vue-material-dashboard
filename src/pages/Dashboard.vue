@@ -145,8 +145,7 @@
 
           <template slot="footer">
             <div class="stats">
-              <md-icon>date_range</md-icon>
-              Valid data of last request
+              <md-button @click="sendData" class="md-primary">SEND!</md-button>
             </div>
           </template>
         </stats-card>
@@ -310,6 +309,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import {
   StatsCard,
   ChartCard,
@@ -326,9 +327,33 @@ export default {
     NavTabsTable,
     OrderedTable,
   },
+  mounted(){
+
+
+  },
+  methods: {
+sendData(){
+
+  // mocky test request
+  // https://run.mocky.io/v3/c5525a96-892e-474a-9227-b9d5db725a85
+  
+
+  axios
+  .get("http://localhost:8080/runSimulations?features=10&neurons=4&layers=3&accuracy=0.99&reliability=0.99&range=0")
+  .then((res) => {
+    this.simulationData=res.data;
+          console.log(res.data)
+  })
+  .catch((error) => {
+          console.log(error);
+  });
+
+}
+  },
   data() {
     return {
       isConvolutionalApplication: false,
+      simulationData:[],
       dailySalesChart: {
         data: {
           labels: ["M", "T", "W", "T", "F", "S", "S"],
