@@ -182,17 +182,24 @@
           </md-card-header>
           <md-card-content>
             <div>
-              <!-- <md-table v-model="users" :table-header-color="tableHeaderColor">
+              <table class="table mt-5">
+      <thead>
+        <tr>
+          <th scope="col" v-for="(headerTitle, i) in headerslowerBounds" :key="i">{{headerTitle}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">
+          <th scope="row">{{ ++i }}</th>
+          <td v-for="(col,j) in entry" :key="j">{{ col }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+              <!-- <md-table v-model="lowerBoundsSamplesTable" >
                 <md-table-row slot="md-table-row" slot-scope="{ item }">
-                  <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
-                  <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-                  <md-table-cell md-label="Salary">{{
-                    item.salary
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Country">{{
-                    item.country
-                  }}</md-table-cell>
-                  <md-table-cell md-label="City">{{ item.city }}</md-table-cell>
+                  <md-table-cell md-label="ID">{{ item }}</md-table-cell>
+
                 </md-table-row>
               </md-table> -->
             </div>
@@ -278,7 +285,7 @@ export default {
           this.lowerBoundsSamplesTable = res.data;
 
           console.log("Headers LowerBounds Array:");
-          this.headerslowerBounds = [...Array(100 - this.input.range).keys()];
+          this.headerslowerBounds = [...Array(this.input.range).keys()];
           console.log(this.headerslowerBounds);
           console.log("LowerBounds Array:");
 
@@ -305,6 +312,8 @@ export default {
         range: 20,
         height: 0,
         width: 0,
+        model:"NEURAL_NETWORK",
+        treeHeight:0
       },
       minimalSamplesChart: {
         data: {
