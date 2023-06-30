@@ -1,60 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <!-- <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-      >
-        <chart-card
-          :chart-data="dailySalesChart.data"
-          :chart-options="dailySalesChart.options"
-          :chart-type="'Line'"
-          data-background-color="blue"
-        >
-          <template slot="content">
-            <h4 class="title">Daily Sales</h4>
-            <p class="category">
-              <span class="text-success"
-                ><i class="fas fa-long-arrow-alt-up"></i> 55%
-              </span>
-              increase in today sales.
-            </p>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated 4 minutes ago
-            </div>
-          </template>
-        </chart-card>
-      </div> -->
-
-            
-      <!-- <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-      >
-        <chart-card
-          :chart-data="emailsSubscriptionChart.data"
-          :chart-options="emailsSubscriptionChart.options"
-          :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
-          :chart-type="'Bar'"
-          data-background-color="red"
-        >
-          <template slot="content">
-            <h4 class="title">Email Subscription</h4>
-            <p class="category">Last Campaign Performance</p>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated 10 days ago
-            </div>
-          </template>
-        </chart-card>
-      </div> -->
-
-      <div
+       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <stats-card data-background-color="green">
@@ -158,10 +105,9 @@
 
           <template slot="content">
             <p class="category"><strong>VC Dims</strong></p>
-            <BR/>
+            <BR />
             <ul v-for="item in simulationData" :key="item.index">
-              <h3 class="title">{{item.model +" "+item.vcdim}}</h3>
-
+              <h3 class="title">{{ item.model + " " + item.vcdim }}</h3>
             </ul>
           </template>
 
@@ -183,10 +129,9 @@
 
           <template slot="content">
             <p class="category"><strong>Minimal Samples</strong></p>
-            <BR/>
+            <BR />
             <ul v-for="item in simulationData" :key="item.index">
-              <h3 class="title">{{item.model +" "+item.minimalSample}}</h3>
-
+              <h3 class="title">{{ item.model + " " + item.minimalSample }}</h3>
             </ul>
           </template>
 
@@ -202,15 +147,17 @@
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
       >
-        <chart-card v-if="showChart"
+        <chart-card
+          v-if="showChart"
           :chart-data="minimalSamplesChart.data"
           :chart-options="minimalSamplesChart.options"
           chart-type="Line"
           data-background-color="green"
         >
           <template slot="content">
-            <h4 class="title">Machine Learning Algorithms Minimal Samples Comparison</h4>
-            
+            <h4 class="title">
+              Machine Learning Algorithms Minimal Samples Comparison
+            </h4>
           </template>
 
           <template slot="footer">
@@ -222,48 +169,6 @@
         </chart-card>
       </div>
 
-      <!-- <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-      >
-        <stats-card data-background-color="red">
-          <template slot="header">
-            <md-icon>store</md-icon>
-          </template>
-
-          <template slot="content">
-            <p class="category">Fixed Issues</p>
-            <h3 class="title">75</h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>local_offer</md-icon>
-              Tracked from Github
-            </div>
-          </template>
-        </stats-card>
-      </div>
-      <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-      >
-        <stats-card data-background-color="blue">
-          <template slot="header">
-            <i class="fab fa-twitter"></i>
-          </template>
-
-          <template slot="content">
-            <p class="category">Folowers</p>
-            <h3 class="title">+245</h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>update</md-icon>
-              Just Updated
-            </div>
-          </template>
-        </stats-card>
-      </div> -->
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
@@ -271,33 +176,14 @@
           <md-card-header data-background-color="orange">
             <h4 class="title">Relationship between Accuracy x Reliability</h4>
             <p class="category">Samples needed</p>
+            <md-button @click="sendRelationship" class="md-transparent"
+              >CALCULATE</md-button
+            >
           </md-card-header>
           <md-card-content>
             <ordered-table table-header-color="orange"></ordered-table>
           </md-card-content>
         </md-card>
-      </div>
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-      >
-        <nav-tabs-card>
-          <template slot="content">
-            <span class="md-nav-tabs-title">Tasks:</span>
-            <md-tabs class="md-success" md-alignment="left">
-              <md-tab id="tab-home" md-label="Bugs" md-icon="bug_report">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-
-              <md-tab id="tab-pages" md-label="Website" md-icon="code">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-
-              <md-tab id="tab-posts" md-label="server" md-icon="cloud">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-            </md-tabs>
-          </template>
-        </nav-tabs-card>
       </div>
     </div>
   </div>
@@ -309,8 +195,6 @@ import axios from "axios";
 import {
   StatsCard,
   ChartCard,
-  NavTabsCard,
-  NavTabsTable,
   OrderedTable,
 } from "@/components";
 
@@ -318,8 +202,6 @@ export default {
   components: {
     StatsCard,
     ChartCard,
-    NavTabsCard,
-    NavTabsTable,
     OrderedTable,
   },
   mounted() {},
@@ -328,39 +210,45 @@ export default {
       // mocky test request
       // https://run.mocky.io/v3/c5525a96-892e-474a-9227-b9d5db725a85
 
-      if (this.isConvolutionalApplication){
-        this.input.features=this.input.height*this.input.width;
+      if (this.isConvolutionalApplication) {
+        this.input.features = this.input.height * this.input.width;
       }
       axios
         .get(
-          "http://localhost:8080/runSimulations?features="+this.input.features+
-          "&neurons="+this.input.neurons+
-          "&layers="+this.input.layers+
-          "&accuracy="+this.input.accuracy+
-          "&reliability="+this.input.reliability+
-          "&range="+this.input.range
+          "http://localhost:8080/runSimulations?features=" +
+            this.input.features +
+            "&neurons=" +
+            this.input.neurons +
+            "&layers=" +
+            this.input.layers +
+            "&accuracy=" +
+            this.input.accuracy +
+            "&reliability=" +
+            this.input.reliability +
+            "&range=" +
+            this.input.range
         )
         .then((res) => {
           this.simulationData = res.data;
-          
+
           console.log(res.data);
-          console.log(res.data.map(t=>t.model));
-          console.log(res.data.map(t=>t.minimalSample));
-          const a=res.data.map(t=>t.minimalSample)
-          const b=[[...a]];
+          console.log(res.data.map((t) => t.model));
+          console.log(res.data.map((t) => t.minimalSample));
+          const a = res.data.map((t) => t.minimalSample);
+          const b = [[...a]];
 
           console.log(b);
 
-this.minimalSamplesChart.data.labels=res.data.map(t=>t.model);
-this.minimalSamplesChart.data.series=b;
-this.minimalSamplesChart.options.high=Math.max(a)+10;
+          this.minimalSamplesChart.data.labels = res.data.map((t) => t.model);
+          this.minimalSamplesChart.data.series = b;
+          this.minimalSamplesChart.options.high = Math.max(a) + 10;
 
-this.emailsSubscriptionChart.data.labels=res.data.map(t=>t.model);
-this.emailsSubscriptionChart.data.series=b;
-this.emailsSubscriptionChart.options.high=Math.max(a)+10;
-          this.showChart=true;
-
-
+          this.emailsSubscriptionChart.data.labels = res.data.map(
+            (t) => t.model
+          );
+          this.emailsSubscriptionChart.data.series = b;
+          this.emailsSubscriptionChart.options.high = Math.max(a) + 10;
+          this.showChart = true;
         })
         .catch((error) => {
           console.log(error);
@@ -371,7 +259,7 @@ this.emailsSubscriptionChart.options.high=Math.max(a)+10;
     return {
       isConvolutionalApplication: false,
       simulationData: [],
-      showChart:false,
+      showChart: false,
       input: {
         features: 10,
         neurons: 5,
@@ -379,8 +267,8 @@ this.emailsSubscriptionChart.options.high=Math.max(a)+10;
         accuracy: 0.99,
         reliability: 0.99,
         range: 0,
-        height:0,
-        width:0
+        height: 0,
+        width: 0,
       },
       minimalSamplesChart: {
         data: {
