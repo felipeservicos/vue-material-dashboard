@@ -79,7 +79,7 @@
 
             <md-field v-if="!isConvolutionalApplication">
               <label>How many features?</label>
-              <md-input type="number" v-model="type"></md-input>
+              <md-input type="number" v-model="input.features"></md-input>
               <span class="md-helper-text"
                 >Ex: weight, height, shape, color... As many as your model
                 has.</span
@@ -89,7 +89,7 @@
             <div v-else>
               <md-field>
                 <label>What is the height in pixels of the image?</label>
-                <md-input type="number" v-model="type"></md-input>
+                <md-input type="number" v-model="input.height"></md-input>
                 <span class="md-helper-text"
                   >Here you fill the <strong>height</strong> in pixels.</span
                 >
@@ -97,7 +97,7 @@
 
               <md-field>
                 <label>What is the width in pixels of the image?</label>
-                <md-input type="number" v-model="type"></md-input>
+                <md-input type="number" v-model="input.width"></md-input>
                 <span class="md-helper-text"
                   >Here you fill the <strong>width</strong> in pixels.</span
                 >
@@ -106,7 +106,7 @@
 
             <md-field>
               <label>What accuracy value do you want?</label>
-              <md-input type="number" v-model="type"></md-input>
+              <md-input type="number" v-model="input.accuracy"></md-input>
               <span class="md-helper-text"
                 >Here you fill the number of accuracy that you hope for your
                 model</span
@@ -115,32 +115,29 @@
 
             <md-field>
               <label>What reliability value do you want?</label>
-              <md-input type="number" v-model="type"></md-input>
+              <md-input type="number" v-model="input.reliability"></md-input>
               <span class="md-helper-text"
                 >Here you fill the number of reliability that you hope for your
                 model</span
               >
             </md-field>
-            <BR/>
-            <md-subheader>Have you considered using a neural network? Can you suggest an basic architecture?</md-subheader>
+            <BR />
+            <md-subheader
+              >Have you considered using a neural network? Can you suggest an
+              basic architecture?</md-subheader
+            >
 
             <md-field>
               <label>Neurons?</label>
-              <md-input type="number" v-model="type"></md-input>
-              <span class="md-helper-text"
-                >Number of neurons suggested</span
-              >
+              <md-input type="number" v-model="input.neurons"></md-input>
+              <span class="md-helper-text">Number of neurons suggested</span>
             </md-field>
 
             <md-field>
               <label>Layers?</label>
-              <md-input type="number" v-model="type"></md-input>
-              <span class="md-helper-text"
-                >Number of layers suggested</span
-              >
+              <md-input type="number" v-model="input.layers"></md-input>
+              <span class="md-helper-text">Number of layers suggested</span>
             </md-field>
-
-
           </template>
 
           <template slot="footer">
@@ -149,8 +146,6 @@
             </div>
           </template>
         </stats-card>
-
-
       </div>
 
       <div
@@ -163,10 +158,10 @@
 
           <template slot="content">
             <p class="category"><strong>VC Dims</strong></p>
-            <ul>
-              <h3 class="title">Neural 1300</h3>
-              <h3 class="title">Linear 13</h3>
-              <h3 class="title">SVM 100</h3>
+            <BR/>
+            <ul v-for="item in simulationData" :key="item.index">
+              <h3 class="title">{{item.model +" "+item.vcdim}}</h3>
+
             </ul>
           </template>
 
@@ -327,33 +322,47 @@ export default {
     NavTabsTable,
     OrderedTable,
   },
-  mounted(){
-
-
-  },
+  mounted() {},
   methods: {
-sendData(){
+    sendData() {
+      // mocky test request
+      // https://run.mocky.io/v3/c5525a96-892e-474a-9227-b9d5db725a85
 
-  // mocky test request
-  // https://run.mocky.io/v3/c5525a96-892e-474a-9227-b9d5db725a85
-  
-
-  axios
-  .get("http://localhost:8080/runSimulations?features=10&neurons=4&layers=3&accuracy=0.99&reliability=0.99&range=0")
-  .then((res) => {
-    this.simulationData=res.data;
-          console.log(res.data)
-  })
-  .catch((error) => {
+      if (this.isConvolutionalApplication){
+        this.features=this.height*this.width;
+      }
+      axios
+        .get(
+          "http://localhost:8080/runSimulations?features="+this.input.features+
+          "&neurons="+this.input.neurons+
+          "&layers="+this.input.layers+
+          "&accuracy="+this.input.accuracy+
+          "&reliability="+this.input.reliability+
+          "&range="+this.input.range
+        )
+        .then((res) => {
+          this.simulationData = res.data;
+          console.log(res.data);
+        })
+        .catch((error) => {
           console.log(error);
-  });
-
-}
+        });
+    },
   },
   data() {
     return {
       isConvolutionalApplication: false,
-      simulationData:[],
+      simulationData: [],
+      input: {
+        features: 0,
+        neurons: 0,
+        layers: 0,
+        accuracy: 0.99,
+        reliability: 0.99,
+        range: 0,
+        height:0,
+        width:0
+      },
       dailySalesChart: {
         data: {
           labels: ["M", "T", "W", "T", "F", "S", "S"],
