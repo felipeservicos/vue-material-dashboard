@@ -7,7 +7,7 @@
   >
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
-        <div class="logo-img">
+        <div class="">
           <img :src="imgLogo" alt="" />
         </div>
       </a>
@@ -47,7 +47,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD",
+      default: "PAC LEARNING - TECMF - PUC",
     },
     sidebarBackgroundImage: {
       type: String,
@@ -55,7 +55,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/vue-logo.png"),
+      default: require("@/assets/img/digital-brain.jpg"),
     },
     sidebarItemColor: {
       type: String,
