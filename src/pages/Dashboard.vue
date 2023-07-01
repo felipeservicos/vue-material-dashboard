@@ -279,7 +279,9 @@ export default {
           "&model=" +
           this.modelSelect +
           "&range=" +
-          this.input.range
+          this.input.range +
+          "&treeHeight=" +
+          this.input.treeHeight
         )
         .then((res) => {
           this.lowerBoundsSamplesTable = res.data;
