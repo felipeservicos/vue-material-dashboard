@@ -1,9 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-      >
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <stats-card data-background-color="green">
           <template slot="header">
             <md-icon>description</md-icon>
@@ -11,68 +9,52 @@
 
           <template slot="content">
             <p class="category">
-              <strong
-                >Please fill some questions for a better suggestion</strong
-              >
+              <strong>Please fill some questions for a better suggestion</strong>
             </p>
 
-            <md-radio v-model="isConvolutionalApplication" :value="false"
-              >My model <strong>will not</strong> need to work processing
-              images</md-radio
-            >
-            <md-radio v-model="isConvolutionalApplication" :value="true"
-              >My model will work with images processing</md-radio
-            >
+            <md-radio v-model="isConvolutionalApplication" :value="false">My model <strong>will not</strong> need to work
+              processing
+              images</md-radio>
+            <md-radio v-model="isConvolutionalApplication" :value="true">My model will work with images
+              processing</md-radio>
 
             <md-field v-if="!isConvolutionalApplication">
               <label>How many features?</label>
               <md-input type="number" v-model="input.features"></md-input>
-              <span class="md-helper-text"
-                >Ex: weight, height, shape, color... As many as your model
-                has.</span
-              >
+              <span class="md-helper-text">Ex: weight, height, shape, color... As many as your model
+                has.</span>
             </md-field>
 
             <div v-else>
               <md-field>
                 <label>What is the height in pixels of the image?</label>
                 <md-input type="number" v-model="input.height"></md-input>
-                <span class="md-helper-text"
-                  >Here you fill the <strong>height</strong> in pixels.</span
-                >
+                <span class="md-helper-text">Here you fill the <strong>height</strong> in pixels.</span>
               </md-field>
 
               <md-field>
                 <label>What is the width in pixels of the image?</label>
                 <md-input type="number" v-model="input.width"></md-input>
-                <span class="md-helper-text"
-                  >Here you fill the <strong>width</strong> in pixels.</span
-                >
+                <span class="md-helper-text">Here you fill the <strong>width</strong> in pixels.</span>
               </md-field>
             </div>
 
             <md-field>
               <label>What accuracy value do you want?</label>
               <md-input type="number" v-model="input.accuracy"></md-input>
-              <span class="md-helper-text"
-                >Here you fill the number of accuracy that you hope for your
-                model</span
-              >
+              <span class="md-helper-text">Here you fill the number of accuracy that you hope for your
+                model</span>
             </md-field>
 
             <md-field>
               <label>What reliability value do you want?</label>
               <md-input type="number" v-model="input.reliability"></md-input>
-              <span class="md-helper-text"
-                >Here you fill the number of reliability that you hope for your
-                model</span
-              >
+              <span class="md-helper-text">Here you fill the number of reliability that you hope for your
+                model</span>
             </md-field>
             <BR />
-            <md-subheader
-              >Have you considered using a neural network? Can you suggest an
-              basic architecture?</md-subheader
-            >
+            <md-subheader>Have you considered using a neural network? Can you suggest an
+              basic architecture?</md-subheader>
 
             <md-field>
               <label>Neurons?</label>
@@ -95,9 +77,7 @@
         </stats-card>
       </div>
 
-      <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-      >
+      <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="green">
           <template slot="header">
             <md-icon>info_outline</md-icon>
@@ -119,9 +99,7 @@
           </template>
         </stats-card>
       </div>
-      <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-      >
+      <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="orange">
           <template slot="header">
             <md-icon>content_copy</md-icon>
@@ -144,16 +122,9 @@
         </stats-card>
       </div>
 
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-      >
-        <chart-card
-          v-if="showChart"
-          :chart-data="minimalSamplesChart.data"
-          :chart-options="minimalSamplesChart.options"
-          chart-type="Line"
-          data-background-color="green"
-        >
+      <div class="md-layout-item md-medium-size-50 md-xsmall-size-50 md-size-50">
+        <chart-card v-if="showChart" :chart-data="minimalSamplesChart.data" :chart-options="minimalSamplesChart.options"
+          chart-type="Line" data-background-color="green">
           <template slot="content">
             <h4 class="title">
               Machine Learning Algorithms Minimal Samples Comparison
@@ -169,9 +140,7 @@
         </chart-card>
       </div>
 
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-      >
+      <div class="md-layout-item md-medium-size-50 md-xsmall-size-50 md-size-50">
         <md-card>
           <md-card-header data-background-color="orange">
             <h4 class="title"><strong>Samples needed</strong></h4>
@@ -179,48 +148,47 @@
 
 
             <div class="md-layout-item">
-        <md-field>
-          <label for="algorithm">Algorithm</label>
-          <md-select v-model="modelSelect" name="algorithm" id="algorithm">
-            <md-option  v-for="item in simulationData" :key="item.index" :value="item.model">{{item.model}}</md-option>
-</md-select>
+              <md-field>
+                <label for="algorithm">Algorithm</label>
+                <md-select v-model="modelSelect" name="algorithm" id="algorithm">
+                  <md-option v-for="item in simulationData" :key="item.index"
+                    :value="item.model">{{ item.model }}</md-option>
+                </md-select>
 
-        </md-field>
+              </md-field>
 
-        <md-field>
-              <label>Range</label>
-              <md-input type="number" v-model="input.range"></md-input>
-              <span class="md-helper-text">Range size. Ex. 20 then Accuracy and Reliability go 99% to 80%..</span>
-            </md-field>
-      </div>
+              <md-field>
+                <label>Range</label>
+                <md-input type="number" v-model="input.range"></md-input>
+                <span class="md-helper-text">Range size. Ex. 20 then Accuracy and Reliability go 99% to 80%..</span>
+              </md-field>
+            </div>
 
 
 
-            <md-button @click="sendRelationship" class="md-transparent"
-              >CALCULATE</md-button
-            >
+            <md-button @click="sendRelationship" class="md-transparent">CALCULATE</md-button>
           </md-card-header>
           <md-card-content>
             <div>
               <table class="table ma-5 ">
-      <thead>
+                <thead>
 
-        <tr >
-          <th></th>
-          <th scope="col" v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">{{ 100 - ++i + "%"}}</th>
-        </tr>
-      </thead>
-      <tbody>
+                  <tr>
+                    <th></th>
+                    <th scope="col" v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">{{ 100 - ++i + "%" }}</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-        
-        <tr v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">
-          
-          <th scope="row">{{ 100 - ++i + "%"}}</th>
-          <td v-for="(col,j) in entry" :key="j">{{ col }}</td>
 
-        </tr>
-      </tbody>
-    </table>
+                  <tr v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">
+
+                    <th scope="row">{{ 100 - ++i + "%" }}</th>
+                    <td v-for="(col, j) in entry" :key="j">{{ col }}</td>
+
+                  </tr>
+                </tbody>
+              </table>
 
             </div>
           </md-card-content>
@@ -240,7 +208,7 @@ export default {
     StatsCard,
     ChartCard,
   },
-  mounted() {},
+  mounted() { },
   methods: {
     sendData() {
       // mocky test request
@@ -252,17 +220,17 @@ export default {
       axios
         .get(
           "http://localhost:8080/runSimulations?features=" +
-            this.input.features +
-            "&neurons=" +
-            this.input.neurons +
-            "&layers=" +
-            this.input.layers +
-            "&accuracy=" +
-            this.input.accuracy +
-            "&reliability=" +
-            this.input.reliability +
-            "&range=" +
-            this.input.range
+          this.input.features +
+          "&neurons=" +
+          this.input.neurons +
+          "&layers=" +
+          this.input.layers +
+          "&accuracy=" +
+          this.input.accuracy +
+          "&reliability=" +
+          this.input.reliability +
+          "&range=" +
+          this.input.range
         )
         .then((res) => {
           this.simulationData = res.data;
@@ -291,15 +259,15 @@ export default {
       axios
         .get(
           "http://localhost:8080/lowerBoundsSamplesBetweenAccuracyAndReliability?features=" +
-            this.input.features +
-            "&neurons=" +
-            this.input.neurons +
-            "&layers=" +
-            this.input.layers +
-            "&model=" +
-            this.modelSelect +
-            "&range=" +
-            this.input.range
+          this.input.features +
+          "&neurons=" +
+          this.input.neurons +
+          "&layers=" +
+          this.input.layers +
+          "&model=" +
+          this.modelSelect +
+          "&range=" +
+          this.input.range
         )
         .then((res) => {
           this.lowerBoundsSamplesTable = res.data;
@@ -315,7 +283,7 @@ export default {
   },
   data() {
     return {
-      modelSelect:"",
+      modelSelect: "",
       isConvolutionalApplication: false,
       simulationData: [],
       showChart: false,
@@ -329,8 +297,8 @@ export default {
         range: 20,
         height: 0,
         width: 0,
-        model:"NEURAL_NETWORK",
-        treeHeight:0
+        model: "NEURAL_NETWORK",
+        treeHeight: 0
       },
       minimalSamplesChart: {
         data: {
