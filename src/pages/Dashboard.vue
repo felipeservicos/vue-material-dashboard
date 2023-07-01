@@ -52,6 +52,16 @@
               <span class="md-helper-text">Here you fill the number of reliability that you hope for your
                 model</span>
             </md-field>
+
+            <BR />
+            <md-subheader>Have you considered using a Trees or Random Forest for your model? 
+              ?</md-subheader>
+            <md-field>
+              <label>Tree Depth?</label>
+              <md-input type="number" v-model="input.treeHeight"></md-input>
+              <span class="md-helper-text">Here you fill the tree height
+                model</span>
+            </md-field>
             <BR />
             <md-subheader>Have you considered using a neural network? Can you suggest an
               basic architecture?</md-subheader>
@@ -230,7 +240,9 @@ export default {
           "&reliability=" +
           this.input.reliability +
           "&range=" +
-          this.input.range
+          this.input.range +
+          "&treeHeight=" +
+          this.input.treeHeight
         )
         .then((res) => {
           this.simulationData = res.data;
@@ -298,7 +310,7 @@ export default {
         height: 0,
         width: 0,
         model: "NEURAL_NETWORK",
-        treeHeight: 0
+        treeHeight: 6
       },
       minimalSamplesChart: {
         data: {
