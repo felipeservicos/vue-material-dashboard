@@ -9,7 +9,7 @@
 
           <template slot="content">
             <p class="category">
-              <strong>Please fill some questions for a better suggestion</strong>
+              <strong>1 - Please fill some questions for a better suggestion</strong>
             </p>
 
             <md-radio v-model="isConvolutionalApplication" :value="false">My model <strong>will not</strong> need to work
@@ -153,7 +153,7 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-50 md-size-50">
         <md-card>
           <md-card-header data-background-color="orange">
-            <h4 class="title"><strong>Samples needed</strong></h4>
+            <h4 class="title"><strong>2 - Samples needed</strong></h4>
             <p class="category"><strong>Relationship between Accuracy x Reliability</strong></p>
 
 
