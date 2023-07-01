@@ -174,34 +174,54 @@
       >
         <md-card>
           <md-card-header data-background-color="orange">
-            <h4 class="title">Relationship between Accuracy x Reliability</h4>
-            <p class="category">Samples needed</p>
+            <h4 class="title"><strong>Samples needed</strong></h4>
+            <p class="category"><strong>Relationship between Accuracy x Reliability</strong></p>
+
+
+            <div class="md-layout-item">
+        <md-field>
+          <label for="algorithm">Algorithm</label>
+          <md-select v-model="modelSelect" name="algorithm" id="algorithm">
+            <md-option  v-for="item in simulationData" :key="item.index" :value="item.model">{{item.model}}</md-option>
+</md-select>
+
+        </md-field>
+
+        <md-field>
+              <label>Range</label>
+              <md-input type="number" v-model="input.range"></md-input>
+              <span class="md-helper-text">Range size. Ex. 20 then Accuracy and Reliability go 99% to 80%..</span>
+            </md-field>
+      </div>
+
+
+
             <md-button @click="sendRelationship" class="md-transparent"
               >CALCULATE</md-button
             >
           </md-card-header>
           <md-card-content>
             <div>
-              <table class="table mt-5">
+              <table class="table ma-5 ">
       <thead>
-        <tr>
-          <th scope="col" v-for="(headerTitle, i) in headerslowerBounds" :key="i">{{headerTitle}}</th>
+
+        <tr >
+          <th></th>
+          <th scope="col" v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">{{ 100 - ++i + "%"}}</th>
         </tr>
       </thead>
       <tbody>
+
+        
         <tr v-for="(entry, i) in lowerBoundsSamplesTable" :key="i">
-          <th scope="row">{{ ++i }}</th>
+          
+          <th scope="row">{{ 100 - ++i + "%"}}</th>
           <td v-for="(col,j) in entry" :key="j">{{ col }}</td>
 
         </tr>
       </tbody>
     </table>
-              <!-- <md-table v-model="lowerBoundsSamplesTable" >
-                <md-table-row slot="md-table-row" slot-scope="{ item }">
-                  <md-table-cell md-label="ID">{{ item }}</md-table-cell>
 
-                </md-table-row>
-              </md-table> -->
             </div>
           </md-card-content>
         </md-card>
@@ -277,17 +297,14 @@ export default {
             "&layers=" +
             this.input.layers +
             "&model=" +
-            this.input.model +
+            this.modelSelect +
             "&range=" +
             this.input.range
         )
         .then((res) => {
           this.lowerBoundsSamplesTable = res.data;
 
-          console.log("Headers LowerBounds Array:");
-          this.headerslowerBounds = [...Array(this.input.range).keys()];
-          console.log(this.headerslowerBounds);
-          console.log("LowerBounds Array:");
+
 
           console.log(res.data);
         })
@@ -298,11 +315,11 @@ export default {
   },
   data() {
     return {
+      modelSelect:"",
       isConvolutionalApplication: false,
       simulationData: [],
       showChart: false,
       lowerBoundsSamplesTable: [],
-      headerslowerBounds: [],
       input: {
         features: 10,
         neurons: 5,
